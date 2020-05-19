@@ -1,10 +1,14 @@
-// Global Variables
+// VARIABLES
 const dataURL = "data.json";
+let data = {};
+let wordList = [];
 
+// APPLICATION
 // When document is ready
 $(function () {
 	// Initialize page
-	let wordList = initPage();
+	initPage();
+	console.log("wordlist: ", wordList);
 
 	// Listen for Add Word button
 	$("#addBtn").on("click", (event) => {
@@ -32,19 +36,18 @@ $(function () {
 });
 
 // HELPER FUNCTIONS
-// Initialize page function
+// Initialize page - gets data file, creates word array, and displays page
 async function initPage() {
 	// Get data
 	data = await getJSON(dataURL);
 	console.log("data: ", data);
 	// Get list of stopwords
-	const stopwords = data.messages.settings.index.analysis.analyzer.my_stop.stopwords;
-	console.log("wordlist: ", stopwords);
+	wordList = data.messages.settings.index.analysis.analyzer.my_stop.stopwords;
+	console.log("wordlist: ", wordList);
 	// Display stopwords on page
-	showList(stopwords);
-	return stopwords;
+	showList(wordList);
 }
-// GET data function
+// GET data file
 async function getJSON(fileURL) {
 	let response;
 	try {
@@ -56,7 +59,7 @@ async function getJSON(fileURL) {
 	console.log("json: ", response.json);
 	return response.json();
 }
-// Display list function
+// Display HTML list
 function showList(list) {
 	// first clear list
 	$("#stopWords").empty();
