@@ -1,0 +1,31 @@
+{
+	"messages": {
+		"settings": {
+			"index": {
+				"number_of_shards": "1",
+
+				"provided_name": "messages",
+
+				"creation_date": "1589503895698",
+
+				"analysis": {
+					"analyzer": {
+						"my_stop": {
+							"type": "stop",
+
+							"stopwords": ["you", "i", "am", "my", "can", "the", "him", "me"]
+						}
+					}
+				},
+
+				"number_of_replicas": "1",
+
+				"uuid": "xJr0Fm9IQoG2LvD6Vm8Org",
+
+				"version": {
+					"created": "7070099"
+				}
+			}
+		}
+	}
+}
