@@ -21,7 +21,6 @@ $(function () {
 		console.log("Added word to list!");
 		$("#addInput").val("");
 	});
-
 	// Listen for Delete buttons
 	$("#stopWords").on("click", ".delete", function (event) {
 		event.preventDefault();
@@ -30,8 +29,14 @@ $(function () {
 		wordList = wordList.filter((word) => word !== deleteWord);
 		console.log("wordlist: ", wordList);
 		showList(wordList);
-		// await updateData();
 		console.log("Deleted word from list!");
+	});
+	// Listen for Submit Changes button
+	$("#update").on("click", (event) => {
+		data.messages.settings.index.analysis.analyzer.my_stop.stopwords = wordList;
+		console.log("data: ", data);
+		await putJSON(dataURL);
+		console.log("Data has been updated!");
 	});
 });
 
@@ -74,4 +79,14 @@ function showList(list) {
 	});
 }
 // PUT data
-async function putJSON() {}
+async function putJSON(fileURL) {
+	let response = await fetch(fileURL, {
+		method: 'POST',
+		headers: {
+		  'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify(data)
+	});
+	let result = await response.json();
+	console.log(result.message);
+}
