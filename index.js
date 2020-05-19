@@ -1,9 +1,10 @@
-// Location of data file
+// Global Variables
 const dataURL = "data.json";
+
 // When document is ready
 $(function () {
 	// Initialize page
-	initPage();
+	let wordList = initPage();
 
 	// Listen for Add Word button
 	$("#addBtn").on("click", (event) => {
@@ -34,13 +35,14 @@ $(function () {
 // Initialize page function
 async function initPage() {
 	// Get data
-	const data = await getJSON(dataURL);
+	data = await getJSON(dataURL);
 	console.log("data: ", data);
 	// Get list of stopwords
-	let wordList = data.messages.settings.index.analysis.analyzer.my_stop.stopwords;
-	console.log("wordlist: ", wordList);
+	const stopwords = data.messages.settings.index.analysis.analyzer.my_stop.stopwords;
+	console.log("wordlist: ", stopwords);
 	// Display stopwords on page
-	showList(wordList);
+	showList(stopwords);
+	return stopwords;
 }
 // GET data function
 async function getJSON(fileURL) {
