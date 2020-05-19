@@ -35,8 +35,7 @@ $(function () {
 	$("#update").on("click", (event) => {
 		data.messages.settings.index.analysis.analyzer.my_stop.stopwords = wordList;
 		console.log("data: ", data);
-		await putJSON(dataURL);
-		console.log("Data has been updated!");
+		putJSON(dataURL);
 	});
 });
 
@@ -81,11 +80,11 @@ function showList(list) {
 // PUT data
 async function putJSON(fileURL) {
 	let response = await fetch(fileURL, {
-		method: 'POST',
+		method: "POST",
 		headers: {
-		  'Content-Type': 'application/json;charset=utf-8'
+			"Content-Type": "application/json;charset=utf-8",
 		},
-		body: JSON.stringify(data)
+		body: JSON.stringify(data),
 	});
 	let result = await response.json();
 	console.log(result.message);
