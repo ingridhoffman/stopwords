@@ -1,5 +1,5 @@
 // VARIABLES
-const dataURL = "data.json";
+const dataURL = "http://localhost:9200/messages/_mapping";
 let data = {};
 let wordList = [];
 
